@@ -1,10 +1,7 @@
 import streamlit as st
 import sys
-sys.path.insert(0, 'C:/Projects/Project/job_scraping/job-scraper')
-from glassdoor.acct import glassdoor_acct
-from illinoisjoblink.acct import illinois_acct
-from indeed.indeed_scrap import indeed_acct
-from ziprecruiter.zip_acct import zip_acct
+from Parse.indeed_scrap import indeed_acct
+from Parse.zip_acct import zip_acct
 import pandas as pd
 from io import BytesIO
 import time
