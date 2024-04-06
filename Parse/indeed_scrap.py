@@ -21,15 +21,17 @@ def indeed_acct(skill, place, age, no_of_pages):
 
     indeed_posts=[]
 
-    # Chrome Driver setup
-    def set_chrome_driver(headless=True):
-        options = Options()
-        if headless:
-            options.add_argument('--headless')
-        chrome_service = Service(ChromeDriverManager().install())
-        
-        driver = webdriver.Chrome(service=chrome_service, options=options)
-        return driver
+def set_chrome_driver(headless=True, path_to_chromedriver='/Parse/122.chromedriver-win64/chromedriver.exe'):
+    options = Options()
+    if headless:
+        options.add_argument('--headless')
+    # ChromeDriver의 경로를 직접 지정합니다.
+    chrome_service = Service(executable_path=path_to_chromedriver)
+    driver = webdriver.Chrome(service=chrome_service, options=options)
+    return driver
+
+# 함수를 호출할 때, 다운로드한 ChromeDriver의 실제 경로를 지정해야 합니다.
+driver = set_chrome_driver(headless=False, path_to_chromedriver='/Parse/122.chromedriver-win64/chromedriver.exe')
 
     
     driver = set_chrome_driver(headless=False)
