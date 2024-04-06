@@ -46,7 +46,7 @@ def indeed_acct(skill, place, age, no_of_pages):
             response = requests.get(url, headers=headers)
             time.sleep(10)
             #response = requests.get(url, headers=headers)
-            html = driver.page_source
+            html = response.text
 
             # Scrapping the Web (you can use 'html' or 'lxml')
             soup = BeautifulSoup(html, 'lxml')
