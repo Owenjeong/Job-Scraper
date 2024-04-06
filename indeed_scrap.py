@@ -10,11 +10,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
-# import smtplib
-# from email.message import EmailMessage
-# from email.mime.multipart import MIMEMultipart
-# from email.mime.base import MIMEBase
-# from email import encoders
+
 from parsel import Selector
 
 def indeed_acct(skill, place, age, no_of_pages):
@@ -22,36 +18,16 @@ def indeed_acct(skill, place, age, no_of_pages):
     headers = {
         "User-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"}
 
-    # Skills & Place of Work
-    # skill = input('Enter your Skill: ').strip()
-    # place = input('Enter the location: ').strip()
-    # no_of_pages = int(input('Enter the # of pages to scrape: '))
-    # age = input('Enter the age: ').strip()
-
 
     indeed_posts=[]
-
-    # # Chrome Driver setup
-    # def set_chrome_driver(headless=True):
-    #     options = Options()
-    #     if headless:
-    #         options.add_argument('headless')
-    #     #options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36")
-    #     chrome_driver_path = ChromeDriverManager().install()
-    #     driver = webdriver.Chrome(chrome_driver_path, options=options)
-    #     return driver
 
     # Chrome Driver setup
     def set_chrome_driver(headless=True):
         options = Options()
         if headless:
             options.add_argument('--headless')
-        # 추가적으로 필요한 옵션들은 여기에 추가하십시오.
-        
-        # ChromeDriverManager를 통해 자동으로 드라이버 경로를 관리합니다.
         chrome_service = Service(ChromeDriverManager().install())
         
-        # Service 객체를 사용하여 Chrome 드라이버 초기화
         driver = webdriver.Chrome(service=chrome_service, options=options)
         return driver
 
@@ -80,10 +56,6 @@ def indeed_acct(skill, place, age, no_of_pages):
             
             for i in outer_most_point.find('ul'):
             
-                # Job Title:
-                # if i.find('h2', {'class': 'jobTitle css-mr1oe7 eu4oa1w0'}) is not None:
-                #     elif jobs = i.find('h2', {'class': 'jobTitle css-mr1oe7 eu4oa1w0'}).find('span').get('title') is None
-                #     elif jobs = i.find('h2', {'class': 'jobTitle css-1u6tfqq eu4oa1w0'}).find('span').get('title')
                 job_title = None
 
 
@@ -139,8 +111,6 @@ def indeed_acct(skill, place, age, no_of_pages):
 
     # put together in list
 
-    # (create a dictionary with keys and a list of values from above "indeed_posts")
-
     indeed_dict_list=defaultdict(list)
 
     # # Fields for our DF 
@@ -150,46 +120,8 @@ def indeed_acct(skill, place, age, no_of_pages):
     driver.quit()  # Close the webdriver
 
 
-    # pd.set_option('display.max_colwidth', None)
-
-    # print('These Href links will go to a new page containing full job description')
-    # print('\n')
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][0]) 
-    # #these are not the same, probably from recruiter(s)
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][1])
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][2])
-
-
     df = pd.DataFrame(indeed_posts,columns=indeed_spec)
 
     return df
-    # csv_file= 'output.csv'
-    # df.to_csv(csv_file, index=False)
 
-
-    # def send_email(to_email, attachment_path):
-    #     email = "dailyreports530@gmail.com"        # Your Gmail email
-    #     password = "eoykzgqohlmgpqox"                 # Your Gmail password
-
-    #     msg = MIMEMultipart()
-    #     msg["From"] = email
-    #     msg["To"] = to_email
-    #     msg["Subject"] = f"{skill} roles from Indeed in {place}"
-
-    #     # Attach the CSV file
-    #     with open(attachment_path, 'rb') as file:
-    #         attachment = MIMEBase("application", "octet-stream")
-    #         attachment.set_payload(file.read())
-    #         encoders.encode_base64(attachment)
-    #         attachment.add_header("Content-Disposition", "attachment", filename=csv_file)
-    #         msg.attach(attachment)
-
-    #     # Send the email
-    #     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-    #         server.login(email, password)
-    #         server.send_message(msg)
-    #         server.quit()
-
-    # to_email = 'dailyreports530@gmail.com; owenjeong530@gmail.com'
-    # send_email(to_email, csv_file)
 
