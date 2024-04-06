@@ -49,7 +49,7 @@ def indeed_acct(skill, place, age, no_of_pages):
             html = response.text
 
             # Scrapping the Web (you can use 'html' or 'lxml')
-            soup = BeautifulSoup(html, 'lxml')
+            soup = BeautifulSoup(html, 'html.parser')
 
             # Outer Most Entry Point of HTML:
             outer_most_point=soup.find('div',attrs={'id':'mosaic-provider-jobcards'})
