@@ -17,7 +17,6 @@ from email import encoders
 
 def zip_acct(skill, place, age, no_of_pages):
     # this was used for the person contacting me who had these details for their system
-    # this was used for the person contacting me who had these details for their system
     headers = {
         "User-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"}
 
@@ -29,18 +28,14 @@ def zip_acct(skill, place, age, no_of_pages):
         options = Options()
         if headless:
             options.add_argument('--headless')
-        # 추가적으로 필요한 옵션들은 여기에 추가하십시오.
         
-        # ChromeDriverManager를 통해 자동으로 드라이버 경로를 관리합니다.
         chrome_service = Service(ChromeDriverManager().install())
         
-        # Service 객체를 사용하여 Chrome 드라이버 초기화
         driver = webdriver.Chrome(service=chrome_service, options=options)
         return driver
 
     driver = set_chrome_driver(False)
-
-    # https://www.ziprecruiter.com/jobs-search?search=valuation&location=Chicago%2C+IL&radius=25&page=1&impression_superset_id=CFRAY%3A8373ac236b92e148-IAD
+    
     for page in range(no_of_pages):
         # Connecting linkedin
             url = 'https://www.ziprecruiter.com/jobs-search?search=' + skill + \
@@ -61,11 +56,6 @@ def zip_acct(skill, place, age, no_of_pages):
             # "UL" lists where the data are stored:
             
             for i in outer_most_point.find_all('div'):
-            
-                # Job Title:
-                # if i.find('h2', {'class': 'jobTitle css-mr1oe7 eu4oa1w0'}) is not None:
-                #     elif jobs = i.find('h2', {'class': 'jobTitle css-mr1oe7 eu4oa1w0'}).find('span').get('title') is None
-                #     elif jobs = i.find('h2', {'class': 'jobTitle css-1u6tfqq eu4oa1w0'}).find('span').get('title')
 
                 # 1st if
                 if i.find('h2', {'class': 'font-bold text-black text-header-sm'}) is not None:
@@ -96,10 +86,6 @@ def zip_acct(skill, place, age, no_of_pages):
                 if i.find('p', {'class': 'text-black normal-case text-body-md'}) is not None:
                     location = i.find('p', {'class': 'text-black normal-case text-body-md'}).text.strip()
 
-                # # Job Post Date:
-
-                # if i.find('time', attrs={'class': 'job-search-card__listdate'}) != None:
-                #     post_date = i.find('time', attrs={'class': 'job-search-card__listdate'}).text
 
     # Put everything together in a list of lists for the default dictionary
                     
@@ -118,15 +104,6 @@ def zip_acct(skill, place, age, no_of_pages):
 
     driver.quit()  # Close the webdriver
 
-
-    # pd.set_option('display.max_colwidth', None)
-
-    # print('These Href links will go to a new page containing full job description')
-    # print('\n')
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][0]) 
-    # #these are not the same, probably from recruiter(s)
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][1])
-    # print(pd.DataFrame(indeed_posts,columns=indeed_spec)['link'][2])
 
 
     df = pd.DataFrame(indeed_posts,columns=indeed_spec)
