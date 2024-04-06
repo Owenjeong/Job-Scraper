@@ -28,12 +28,6 @@ def zip_acct(skill, place, age, no_of_pages):
 
     PROXY = "79.209.100.224:3707"  # IP:PORT or HOST:PORT
 
-    # Skills & Place of Work
-    # skill = input('Enter your Skill: ').strip()
-    # place = input('Enter the location: ').strip()
-    # no_of_pages = int(input('Enter the # of pages to scrape: '))
-    # age = input('Enter the age: ').strip()
-
 
     indeed_posts=[]
 
