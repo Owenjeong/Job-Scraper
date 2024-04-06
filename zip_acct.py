@@ -17,16 +17,9 @@ from email import encoders
 
 def zip_acct(skill, place, age, no_of_pages):
     # this was used for the person contacting me who had these details for their system
-    headers = [
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36', 
-        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36', 
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59', 
-        'Mozilla/5.0 (iPhone; CPU iPhone OS 12_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148', 
-        'Mozilla/5.0 (Linux; Android 11; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36', 
-        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/603'
-        ]
-
-    PROXY = "79.209.100.224:3707"  # IP:PORT or HOST:PORT
+    # this was used for the person contacting me who had these details for their system
+    headers = {
+        "User-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"}
 
 
     indeed_posts=[]
